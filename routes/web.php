@@ -30,6 +30,10 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'role:admin']], fu
     Route::resource('kategori', 'KategoriController');
     Route::resource('penerbit', 'PenerbitController');
     Route::resource('buku', 'BukuController');
+    Route::resource('detailpinjam', 'DetailpinjamController');
+    Route::resource('kartupendaftaran', 'KartupendaftaranController');
+    Route::resource('peminjam', 'PeminjamController');
+    Route::resource('peminjaman', 'PeminjamanController');
     
 });
 

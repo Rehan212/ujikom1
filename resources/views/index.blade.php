@@ -45,8 +45,19 @@
 					<a href="#"><i class="fa fa-linkedin"></i></a> --}}
 				</div>
 				<div class="user-panel">
-					{{-- <a href="#">Register</a> /  --}}
-					<a href="backend/user/index">Login</a>
+					@if (Route::has('login'))
+                <div class="top-right links">
+                    @auth
+                        <a href="{{ url('/index') }}">Home</a>
+                    @else
+                        <a href="{{ route('login') }}">Login</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}">Register</a>
+                        @endif
+                    @endauth
+                </div>
+@endif
 				</div>
 			</div>
 		</div>

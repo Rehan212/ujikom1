@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DetailPinjam;
+use Session;
+
 
 class DetailpinjamController extends Controller
 {
@@ -13,12 +16,12 @@ class DetailpinjamController extends Controller
      */
     public function index()
     {
-        $detail = DetailPinjam::all();
+        $detailpinjam = DetailPinjam::all();
         Session::flash("flash_notification",[
            "level" => "success",
            "message" => "berhasil menampilkan"
        ]);
-       return view('backend.detail.index',compact('detail'));
+       return view('backend.detailpinjam.index',compact('detailpinjam'));
     }
 
     /**

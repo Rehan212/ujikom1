@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Petugas extends Model
 {
-      public function peminjaman()
+    public function penerbit()
     {
-        return $this->hasMany('App\Peminjaman');
+        return $this->belongsTo('App\Penerbit', 'penerbit_kode');
     }
-     public function kartupendaftaran()
+    public function kategori()
     {
-        return $this->hasMany('App\KartuPendaftaran');
+        return $this->belongsTo('App\Kategori', 'kategori_kode');
+    }
+    public function detail()
+    {
+        return $this->hasMany(' App\DetailPinjam');
     }
 }

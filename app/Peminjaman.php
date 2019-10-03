@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Peminjaman extends Model
 {
+    protected $table = 'peminjaman';
      public function petugas()
     {
         return $this->belongsTo('App\Petugas');

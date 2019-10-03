@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\KartuPendaftaran;
+use Session;
 
 class KartupendaftaranController extends Controller
 {
@@ -13,7 +15,12 @@ class KartupendaftaranController extends Controller
      */
     public function index()
     {
-        //
+        $kartu = KartuPendaftaran::all();
+        Session::flash("flash_notification",[
+           "level" => "success",
+           "message" => "berhasil menampilkan"
+       ]);
+       return view('backend.kartupendaftaran.index',compact('kartu'));
     }
 
     /**

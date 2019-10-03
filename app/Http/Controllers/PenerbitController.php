@@ -51,7 +51,7 @@ class PenerbitController extends Controller
         $penerbit->penerbit_kode = $request->penerbit_kode;
         $penerbit->penerbit_nama = $request->penerbit_nama;
         $penerbit->penerbit_alamat = $request->penerbit_alamat;
-        $penerbit->penerbit_telp = $request->penerbit_telp;
+        $penerbit->penerbit_tlpn = $request->penerbit_telp;
         $penerbit->save();
          Session::flash("flash_notification",[
             "level" => "success",
@@ -103,7 +103,7 @@ class PenerbitController extends Controller
         $penerbit->penerbit_kode = $request->penerbit_kode;
         $penerbit->penerbit_nama = $request->penerbit_nama;
         $penerbit->penerbit_alamat = $request->penerbit_alamat;
-        $penerbit->penerbit_telp = $request->penerbit_telp;
+        $penerbit->penerbit_tlpn = $request->penerbit_telp;
         $penerbit->save();
         Session::flash("flash_notification",[
             "level" => "success",

@@ -70,7 +70,8 @@
                             <li><a href="kartupendaftaran">Daftar Kartu</a></li>
                             <li><a href="kategori">Kategori</a></li>
                             <li><a href="peminjam">Orang peminjam</a></li>
-                            <li><a href="pinjaman">Pinjaman</a></li>
+                            <li><a href="peminjaman">Pinjaman</a></li>
+                            <li><a href="penerbit">penerbit</a></li>
                             <li><a href="user">User</a></li>
                           </ul>
                         </li>
@@ -183,7 +184,7 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <!-- top tiles -->
-          @yield('content')
+         
           <!-- /top tiles -->
 
           <div class="row">
@@ -195,7 +196,7 @@
           <br />
 
           <div class="row">
-
+            @yield('content')
           </div>
 
 
@@ -253,6 +254,8 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset('assets/templet/build/js/custom.min.js')}}"></script>
-	
+
+    <script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
+    @yield('js')
   </body>
 </html>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Peminjaman;
+use Session;
+use File;
 
 class PeminjamanController extends Controller
 {
@@ -13,7 +16,12 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        //
+        $peminjaman = Peminjaman::all();
+         Session::flash("flash_notification",[
+            "level" => "success",
+            "message" => "berhasil menampilkan"
+        ]);
+        return view('backend.peminjaman.index',compact('peminjaman'));
     }
 
     /**
