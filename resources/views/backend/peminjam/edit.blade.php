@@ -1,10 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.dash')
 @section('content')
+@role('admin')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Mengubah Data Peminjam</div>
+                <div class="card-header"><center><h1>Mengubah Data Peminjam</h1></center></div><br>
                 <div class="card-body">
                     <form action="{{ route('peminjam.update', $peminjam->id) }}" method="post" enctype="multipart/form-data">
                         <input name="_method" type="hidden" value="PATCH">
@@ -23,11 +24,11 @@
     </div>
       <div class="form-group">
         <label for="">Nama Telp</label>
-        <input class="form-control" value="{{ $peminjam->peminjam_telp }}" type="text" name="peminjam_telp">
+        <input class="form-control" value="{{ $peminjam->peminjam_tlpn }}" type="text" name="peminjam_telp">
     </div>
     <div class="form-group">
         <label for="">Foto</label><br>
-        <img src="{{ asset('assets/img/peminjam/'.$peminjam->foto) }}" alt="" height="250px" width="250px">
+        <img src="{{ asset('assets/img/peminjam/'.$peminjam->peminjam_foto) }}" alt="" height="250px" width="250px">
         <input type="file" class="form-control" name="peminjam_foto">
     </div>
     <div class="form-group">
@@ -36,7 +37,7 @@
         </button>
     </div>
     <div class="form-group">
-        <a href="{{ url('peminjam.index') }}" class="btn btn-outline-info">Kembali</a>
+        <a href="{{ url('/backend/peminjam') }}" class="btn btn-outline-info">Kembali</a>
     </div>
         </form>
             </div>
@@ -45,3 +46,4 @@
                         </div>
                             </div>
 @endsection
+@endrole

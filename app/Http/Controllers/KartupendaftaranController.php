@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\KartuPendaftaran;
+use App\Petugas;
+use App\Peminjam;
 use Session;
 
 class KartupendaftaranController extends Controller
@@ -30,8 +32,12 @@ class KartupendaftaranController extends Controller
      */
     public function create()
     {
-        //
+        $petugas = Petugas::all();
+        $kartupendaftaran = KartuPendaftaran::all();
+        $peminjam = Peminjam::all();
+        return view('backend.kartupendaftaran.create', compact('kartupendaftaran', 'petugas', 'peminjam'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -41,7 +47,15 @@ class KartupendaftaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kartupendaftaran = new KartuPendaftaran;
+        $kartupendaftaran->kartupendaftaran_kode = $request->kartupendaftaran_kode;
+        $kartupendaftaran->petugas_kode = $request->petugas_nama;
+        $kartupendaftaran->peminjam_kode = $request->peminjam_nama;
+        $kartupendaftaran->kartu_tanggal_akhir = $request->kartu_tgl_akhir;
+        $kartupendaftaran->kartu_tanggal_pembuatan = $request->kartu_tgl_pembuatan;
+        $kartupendaftaran->kartu_status_aktif = $request->kartu_status_aktif;
+        $kartupendaftaran->save();
+        return redirect()->route('kartupendaftaran.index')->with('success', 'Berhasil ditambah');
     }
 
     /**
@@ -63,7 +77,10 @@ class KartupendaftaranController extends Controller
      */
     public function edit($id)
     {
-        //
+        $petugas = Petugas::all();
+        $kartupendaftaran = KartuPendaftaran::findOrFail($id);
+        $peminjam = Peminjam::all();
+        return view('backend.kartupendaftaran.edit', compact('kartupendaftaran', 'petugas', 'peminjam'));
     }
 
     /**
@@ -75,7 +92,15 @@ class KartupendaftaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kartupendaftaran = KartuPendaftaran::findOrFail($id);
+        $kartupendaftaran->kartupendaftaran_kode = $request->kartupendaftaran_kode;
+        $kartupendaftaran->petugas_kode = $request->petugas_nama;
+        $kartupendaftaran->peminjam_kode = $request->peminjam_nama;
+        $kartupendaftaran->kartu_tanggal_akhir = $request->kartu_tgl_akhir;
+        $kartupendaftaran->kartu_tanggal_pembuatan = $request->kartu_tgl_pembuatan;
+        $kartupendaftaran->kartu_status_aktif = $request->kartu_status_aktif;
+        $kartupendaftaran->save();
+        return redirect()->route('kartupendaftaran.index')->with('success', 'Berhasil diedit');
     }
 
     /**
@@ -86,6 +111,7 @@ class KartupendaftaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kartupendaftaran = KartuPendaftaran::destroy($id);
+        return redirect()->route('kartupendaftaran.index')->with('success', 'Berhasil dihapus');
     }
 }

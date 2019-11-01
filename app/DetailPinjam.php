@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class DetailPinjam extends Model
 {
-     public function buku()
+    protected $table = 'detail_pinjams';
+    public function buku()
     {
-        return $this->belongsTo('App\Buku');
+        return $this->belongsTo('App\Buku', 'buku_kode');
     }
-
-     public function peminjaman()
+    public function peminjaman()
     {
-        return $this->belongsTo('App\Peminjaman');
+        return $this->belongsTo('App\Peminjaman', 'peminjaman_kode');
     }
 }

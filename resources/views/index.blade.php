@@ -48,7 +48,7 @@
 					@if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/index') }}">Home</a>
+                        <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -73,11 +73,11 @@
 					<a href="#"><i class="fa fa-search"></i></a>
 				</div>
 				<ul class="main-menu">
-					{{-- <li><a href="index.html">Home</a></li>
+					<li><a href="/index2">Home</a></li>
 					<li><a href="about.html">Features</a></li>
 					<li><a href="recipes.html">Receipies</a></li>
 					<li><a href="#">Reviews</a></li>
-					<li><a href="contact.html">Contact</a></li> --}}
+					<li><a href="contact.html">Contact</a></li>
 				</ul>
 			</div>
 		</div>
@@ -505,7 +505,7 @@
 
 
 	<!-- Footer section  -->
-	<footer class="footer-section set-bg" data-setbg="/assets/frontend/img/footer-bg.jpg">
+	<footer class="footer-section set-bg" data-setbg="/assets/frontend/img/">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-6">

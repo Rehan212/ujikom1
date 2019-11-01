@@ -1,5 +1,5 @@
 
-@extends('layouts.admin')
+@extends('layouts.dash')
 @section('content')
 <style type="text/css">
 	th,td{
@@ -10,9 +10,8 @@
 
 
 	<div class="col-md-12">
-            <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
+            <table id="tab" class="table table-striped table-bordered" style="width:100%">
 			<!-- <table class="table table-default"> -->
-				<tr class="danger">
 
 			<a href="{{url('/backend/detailpinjam/create')}}"class="btn btn-primary form-control">Tambah Data</a><br><br>
 			
@@ -20,15 +19,14 @@
     
             <thead>
 		    <tr class="bg-info">
-		        <th>Kode Buku</th>
-                <th>Kategori</th>
-                <th>Penerbit</th>
+		        <th>No</th>
+                <th>Kode Detail Peminjaman</th>
+                <th>Peminjaman Kode</th>
                 <th>Judul Buku</th>
-                <th>Jumlah Buku</th>
-                <th>Deskripsi Buku</th>
-                <th>Pengarang Buku</th>
-                <th>Tahun Terbit Buku</th>
-		        <th colspan="3"><center>Action</center></th>
+                <th>Detail Status Kembali</th>
+                <th>Detail Tanggal Kembali</th>
+				<th>Detail Denda</th>
+		        <th><center>Action</center></th>
 			
 		    </tr>
 	        </thead>
@@ -36,20 +34,35 @@
 		        @php
 		        $no=1;
 		        @endphp
-		        @foreach($detailpinjam as $detailpinjam)
+		        @foreach($detailpinjam as $data)
 		            <tr>
 			            <td>{{$no++}}</td>
-			            <td>{{$detailpinjam->detailpinjam_kode}}</td>
-			            <td>{{$detailpinjam->detailpinjam_nama}}</td>
+			            <td>{{ $data->detailpinjam_kode }}</td>
+                        <td>{{ $data->peminjaman->peminjaman_kode }}</td>
+                        <td>{{ $data->buku->buku_judul }}</td>
+                        <td>{{ $data->detail_status_kembali }}</td>
+                        <td>{{ $data->peminjaman->peminjaman_tgl_kembali }}</td>
+						<td>{{ $data->detail_denda }}</td>
 			
-			
-		                <td><a href="{{route('detailpinjam.edit',$detailpinjam->id)}}" class="btn btn-warning">Update</a></td>	
-	                    <td><form action="{{ route('detailpinjam.destroy', $detailpinjam->id) }}" method="post">
-                            @csrf
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn -sm btn-danger" type="submit">Hapus Data</button>
-                            </form>
-                        </td>    
+	                    <td>              
+							@role('admin')
+								<div class="icon-container">
+									<button class="btn-lg"><a  href="{{route('detailpinjam.edit',$data->id)}}"><span class="ti-pencil"></span><span class="icon-name"></span></a></button>
+								</div> 
+							@endrole	
+								{{-- <div class="icon-container">
+									<button class="btn-lg"><a  href="{{route('detailpinjam.show',$data->id)}}"><span class="ti-eye"></span><span class="icon-name"></span></a></button> 
+								</div> --}}
+							@role('admin')	
+								<form action="{{ route('detailpinjam.destroy', $data->id) }}" method="post">
+								@csrf
+								<input type="hidden" name="_method" value="DELETE">
+								<div class="icon-container">
+									<button class="btn-lg" type="submit"><span class="ti-trash"></span><span class="icon-name"></span></button>
+								</div>    
+								</form>
+							@endrole	
+						</td>     
 		            </tr>
 		
 		        @endforeach

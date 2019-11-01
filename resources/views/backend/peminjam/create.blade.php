@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.dash')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Membuat Data Peminjam</div>
+                <div class="card-header"><center><h1>Membuat Data Peminjam</h1></center></div>
                 <div class="card-body">
                     <form action="{{ route('peminjam.store') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -35,7 +35,7 @@
         </button>
     </div>
     <div class="form-group">
-        <a href="{{ url('peminjam') }}" class="btn btn-outline-info">Kembali</a>
+        <a href="{{ url('/backend/peminjam') }}" class="btn btn-outline-info">Kembali</a>
     </div>
         </form>
             </div>

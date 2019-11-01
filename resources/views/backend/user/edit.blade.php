@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.dash')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Mengubah Data Petugas</div>
+                <div class="card-header"><center><h1>Mengubah Data User</h1></center></div>
                 <div class="card-body">
                     <form action="{{ route('user.update', $user->id) }}" method="post">
                         <input name="_method" type="hidden" value="PATCH">
@@ -23,7 +23,7 @@
         </button>
     </div>
     <div class="form-group">
-        <a href="{{ url('user.index') }}" class="btn btn-outline-info">Kembali</a>
+        <a href="{{ url('/backend/user') }}" class="btn btn-outline-info">Kembali</a>
     </div>
         </form>
             </div>

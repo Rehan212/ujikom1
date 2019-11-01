@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.dash')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Mengubah Data Kategori</div>
+                <div class="card-header"><center><h1>Mengubah Data Kategori</h1></center></div>
                 <div class="card-body">
                     <form action="{{ route('kategori.update', $kategori->id) }}" method="post">
                         <input name="_method" type="hidden" value="PATCH">

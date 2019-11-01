@@ -28,6 +28,11 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('assets/templet/build/css/custom.min.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('DataTables-1.10.20/css/jquery.dataTables.css')}}"/>
+  <!-- Datatable css -->
+  <link href="{{ asset('assets/datatable/assets/css/dataTables.bootstrap.css')}}" rel="stylesheet">
+
   </head>
 
   <body class="nav-md">
@@ -64,15 +69,15 @@
                       <ul class="nav side-menu">
                         <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
-                            <li><a href="petugas">Petugas</a></li>
-                            <li><a href="buku">Data Buku</a></li>
-                            <li><a href="detailpinjam">Peminjam Buku</a></li>
-                            <li><a href="kartupendaftaran">Daftar Kartu</a></li>
-                            <li><a href="kategori">Kategori</a></li>
-                            <li><a href="peminjam">Orang peminjam</a></li>
-                            <li><a href="peminjaman">Pinjaman</a></li>
-                            <li><a href="penerbit">penerbit</a></li>
-                            <li><a href="user">User</a></li>
+                            <li><a href="/backend/petugas">Petugas</a></li>
+                            <li><a href="/backend/buku">Data Buku</a></li>
+                            <li><a href="/backend/detailpinjam">Detail Pinjam</a></li>
+                            <li><a href="/backend/kartupendaftaran">Daftar Kartu</a></li>
+                            <li><a href="/backend/kategori">Kategori</a></li>
+                            <li><a href="/backend/peminjam">Orang peminjam</a></li>
+                            <li><a href="/backend/peminjaman">Pinjaman</a></li>
+                            <li><a href="/backend/penerbit">penerbit</a></li>
+                            <li><a href="/backend/user">User</a></li>
                           </ul>
                         </li>
                           <ul class="nav child_menu">
@@ -107,7 +112,17 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li>
+                    <a class="fa fa-sign-out pull-right" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                              </li>   
                   </ul>
                 </li>
 
@@ -184,7 +199,6 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <!-- top tiles -->
-         
           <!-- /top tiles -->
 
           <div class="row">
@@ -196,10 +210,10 @@
           <br />
 
           <div class="row">
-            @yield('content')
+    
           </div>
 
-
+          @yield('content')
         </div>
         <!-- /page content -->
 
@@ -256,6 +270,44 @@
     <script src="{{asset('assets/templet/build/js/custom.min.js')}}"></script>
 
     <script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/DataTables-1.10.20/js/jquery.dataTables.js')}}"></script>
+    <!-- datatables js -->
+    <script src="{{ asset('assets/datatable/assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('assets/datatable/assets/js/dataTables.bootstrap.min.js')}}"></script>
+
+    <script>
+    $(document).ready(function() {
+      $('#datatable').DataTable();
+    } );
+    </script>
+
+<script type="text/javascript">
+  $("#contoh").dataTable({
+        
+         'bServerSide': true,
+         //disable order dan searching pada tombol aksi
+              "columnDefs": [ {
+           "targets": [3],
+           "orderable": false,
+           "searchable": false
+
+         } ],
+         "ajax":{
+           url :"data.php",
+         type: "post",  // method  , by default get
+         //bisa kirim data ke server
+         /*data: function ( d ) {
+           
+                   d.jurusan = "3223";
+               },*/
+       error: function (xhr, error, thrown) {
+         console.log(error);
+
+         }
+       },
+
+     });
+ </script>
     @yield('js')
   </body>
 </html>

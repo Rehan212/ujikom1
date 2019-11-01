@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.dash')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Membuat Data Kategori</div>
+                <div class="card-header"><center><h1>Membuat Data Kategori</h1></center></div>
                 <div class="card-body">
                     <form action="{{ route('kategori.store') }}" method="post">
                         {{ csrf_field() }}

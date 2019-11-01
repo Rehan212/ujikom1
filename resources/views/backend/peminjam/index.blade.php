@@ -1,14 +1,14 @@
 
 
-@extends('layouts.admin')
+@extends('layouts.dash')
 @section('content')
 <center><h1>Data Peminjam</h1></center>
 
 
 	<div class="col-md-12">
-            <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
+            <table id="tab" class="table table-striped table-bordered" style="width:100%">
 			<!-- <table class="table table-default"> -->
-				<tr class="danger">
+				
 
 			<a href="{{url('/backend/peminjam/create')}}"class="btn btn-primary form-control">Tambah Data</a><br><br>
 			
@@ -22,7 +22,7 @@
                 <th>Alamat Peminjam</th>
                 <th>Telp Peminjam</th>
                 <th>Foto Peminjam</th>
-		        <th colspan="3"><center>Action</center></th>
+		        <th><center>Action</center></th>
 			
 		    </tr>
 	        </thead>
@@ -36,16 +36,28 @@
                         <td>{{ $data->peminjam_kode }}</td>
                         <td>{{ $data->peminjam_nama }}</td>
                         <td>{{ $data->peminjam_alamat }}</td>
-                        <td>{{ $data->peminjam_telp }}</td>
-                        <td><img src="{{ asset('assets/img/peminjam/'.$data->foto) }}" alt="" height="100px" width="100px"></td>       
+                        <td>{{ $data->peminjam_tlpn }}</td>
+                        <td><img src="{{ asset('assets/img/peminjam/'.$data->peminjam_foto) }}" alt="" height="100px" width="100px"></td>       
 			
-		                <td><a href="{{route('peminjam.edit',$data->id)}}" class="btn btn-warning">Update</a></td>	
-	                    <td><form action="{{ route('peminjam.destroy', $data->id) }}" method="post">
-                            @csrf
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn -sm btn-danger" type="submit">Hapus Data</button>
-                            </form>
-                        </td>    
+		                <td>
+							@role('admin')
+								<div class="icon-container">
+										<button class="btn-lg"><a  href="{{route('peminjam.edit',$data->id)}}"><span class="ti-pencil"></span><span class="icon-name"></span></a></button>
+									</div>   
+							@endrole 
+							<div class="icon-container">
+									<button class="btn-lg"><a  href="{{route('peminjam.show',$data->id)}}"><span class="ti-eye"></span><span class="icon-name"></span></a></button> 
+								</div>
+							@role('admin')
+									<form action="{{ route('peminjam.destroy', $data->id) }}" method="post">
+									@csrf
+									<input type="hidden" name="_method" value="DELETE">
+									<div class="icon-container">
+										<button class="btn-lg" type="submit"><span class="ti-trash"></span><span class="icon-name"></span></button>
+									</div>    
+									</form>
+							@endrole		
+								</td>    
 		            </tr>
 		
 		        @endforeach

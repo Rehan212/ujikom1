@@ -117,11 +117,13 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $kategori =Kategori::destroy($id);
-        Session::flash("flash_notification",[
-            "level" => "success",
-            "message" => "berhasil mengedit"
-        ]);
-            return redirect()->route('kategori.index');
+        // $kategori =Kategori::findOrFail($id)->delete();
+        // Session::flash("flash_notification",[
+        //     "level" => "success",
+        //     "message" => "berhasil mengedit"
+        // ]);
+        //     return redirect()->route('kategori.index');
+        $kategori = Kategori::findOrFail($id)->delete();
+        return redirect()->route('kategori.index');
     }
 }

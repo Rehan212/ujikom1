@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DetailPinjam;
+use App\Buku;
+use App\Peminjaman;
 use Session;
 
 
@@ -31,7 +33,10 @@ class DetailpinjamController extends Controller
      */
     public function create()
     {
-        //
+        $detailpinjam = DetailPinjam::all();
+        $buku = Buku::all();
+        $peminjaman = Peminjaman::all();
+        return view('backend.detailpinjam.create', compact('detailpinjam', 'buku', 'peminjaman'));
     }
 
     /**
@@ -42,7 +47,15 @@ class DetailpinjamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $detailpinjam = new DetailPinjam;
+        $detailpinjam->detailpinjam_kode = $request->detail_kode;
+        $detailpinjam->detail_status_kembali = $request->detail_status_kembali;
+        $detailpinjam->detail_denda = $request->detail_denda;
+        $detailpinjam->detail_tgl_kembali = $request->detail_tgl_kembali;
+        $detailpinjam->peminjaman_kode = $request->peminjaman_kode;
+        $detailpinjam->buku_kode = $request->buku_judul;
+        $detailpinjam->save();
+        return redirect()->route('detailpinjam.index')->with('success', 'Berhasil ditambah');;
     }
 
     /**
@@ -64,7 +77,10 @@ class DetailpinjamController extends Controller
      */
     public function edit($id)
     {
-        //
+        $detailpinjam = DetailPinjam::findOrFail($id);
+        $buku = Buku::all();
+        $peminjaman = Peminjaman::all();
+        return view('backend.detailpinjam.edit', compact('detailpinjam', 'buku', 'peminjaman'));
     }
 
     /**
@@ -76,7 +92,15 @@ class DetailpinjamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $detailpinjam = DetailPinjam::findOrFail($id);
+        $detailpinjam->detailpinjam_kode = $request->detail_kode;
+        $detailpinjam->detail_status_kembali = $request->detail_status_kembali;
+        $detailpinjam->detail_denda = $request->detail_denda;
+        $detailpinjam->detail_tgl_kembali = $request->detail_tgl_kembali;
+        $detailpinjam->peminjaman_kode = $request->peminjaman_kode;
+        $detailpinjam->buku_kode = $request->buku_judul;
+        $detailpinjam->save();
+        return redirect()->route('detailpinjam.index')->with('success', 'Berhasil diedit');;
     }
 
     /**
@@ -87,6 +111,7 @@ class DetailpinjamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $detailpinjam = DetailPinjam::destroy($id);
+        return redirect()->route('detailpinjam.index')->with('success', 'Berhasil dihapus');
     }
 }
